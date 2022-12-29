@@ -1,20 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, Alert, Platform, TouchableWithoutFeedback, TouchableOpacity, Button } from 'react-native';
+import logError from 'react-native/Libraries/Utilities/logError';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style={[styles.container, containerStyle]}>
+      <Text numberOfLines={1} onPress={() => console.log("Text pressed")}>
+        This is a long text to show how "numberoflines" property of text field works work.
+      </Text>
+      {/* <Image source={require('./assets/icon.png')} /> */}
+      <TouchableOpacity onPress={() => console.log("Image is pressed")} onLongPress={() => console.log("Image is pressed and hold")}>
+        <Image
+          blurRadius={2}
+          fadeDuration={1000}
+          source={{
+            uri: "https://picsum.photos/200/300",
+            height: 300,
+            width: 200
+          }}
+        />
+      </TouchableOpacity>
+      {/* TouchableNativeFeedback works on android and it works on color backgroundColor */}
+      <Button color="green" title="Click Me" onPress={() => Alert.alert("My Title", "My message", [
+        { text: "Yes", onPress: () => console.log("Yes") },
+        { text: "No", onPress: () => console.log("No") }
+      ]
+      )} />
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
-
+const containerStyle = { backgroundColor: 'darkslategray' }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    justifyContent: "center",
+    alignItems: 'center'
   },
 });
