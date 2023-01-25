@@ -8,7 +8,20 @@ import ListItem from './app/components/ListItem';
 import Icon from './app/components/Icon';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingScreen from './app/screens/ListingScreen';
+import AppPicker from './app/components/AppPicker';
+import { useState } from 'react';
+const catagories = [
+  {
+    value: 1,
+    label: "Jacket"
+  },
+  {
+    value: 2,
+    label: "Laptop"
+  }
+]
 export default function App() {
+  const [catagory, setCatagory] = useState()
   return (
     // <WelcomeScreen />
     // <ViewImageScreen />
@@ -21,7 +34,16 @@ export default function App() {
     //   />
     // </Screen>
     // <AccountScreen />
-    <ListingScreen />
+    // <ListingScreen />
+    <Screen>
+      <AppPicker
+        icon="apps"
+        items={catagories}
+        placeholder="Category"
+        selectedItem={catagory}
+        onSelectItem={item => setCatagory(item)}
+      />
+    </Screen>
   );
 }
 
