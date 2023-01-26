@@ -6,14 +6,20 @@ import defaultStyle from '../config/styles'
 import AppText from './AppText'
 import PickerItem from './PickerItem'
 
-const AppPicker = ({ items, icon, placeholder, selectedItem, onSelectItem }) => {
+const AppPicker = ({ items, icon, numberOfColumns = 1, placeholder, selectedItem, onSelectItem, PickerItemComponent = PickerItem }) => {
     const [isModelOpen, setModelOpen] = useState(false)
     return (
         <>
             <TouchableWithoutFeedback onPress={() => setModelOpen(true)}>
                 <View style={styles.container}>
                     {icon && <MaterialCommunityIcons name={icon} size={20} color={colors.medium} style={styles.icon} />}
-                    <AppText style={styles.text}>{selectedItem ? selectedItem.label : placeholder}</AppText>
+                    {
+                        selectedItem ? (
+                            <AppText style={styles.text}>{selectedItem.label}</AppText>
+                        ) : (
+                            <AppText style={styles.placeholder}>{placeholder}</AppText>
+                        )
+                    }
                     <MaterialCommunityIcons name="chevron-down" size={20} color={colors.medium} />
                 </View>
             </TouchableWithoutFeedback>
@@ -22,8 +28,10 @@ const AppPicker = ({ items, icon, placeholder, selectedItem, onSelectItem }) => 
                 <FlatList
                     data={items}
                     keyExtractor={item => item.value.toString()}
+                    numColumns={numberOfColumns}
                     renderItem={({ item }) =>
-                        <PickerItem
+                        <PickerItemComponent
+                            item={item}
                             label={item.label}
                             onPress={
                                 () => {
@@ -54,6 +62,10 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     text: {
+        flex: 1
+    },
+    placeholder: {
+        color: colors.medium,
         flex: 1
     }
 })

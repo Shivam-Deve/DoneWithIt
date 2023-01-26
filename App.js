@@ -10,6 +10,8 @@ import AccountScreen from './app/screens/AccountScreen';
 import ListingScreen from './app/screens/ListingScreen';
 import AppPicker from './app/components/AppPicker';
 import { useState } from 'react';
+import LoginScreen from './app/screens/LoginScreen';
+import ListingEditScreen from './app/screens/ListingEditScreen';
 const catagories = [
   {
     value: 1,
@@ -35,15 +37,17 @@ export default function App() {
     // </Screen>
     // <AccountScreen />
     // <ListingScreen />
-    <Screen>
-      <AppPicker
-        icon="apps"
-        items={catagories}
-        placeholder="Category"
-        selectedItem={catagory}
-        onSelectItem={item => setCatagory(item)}
-      />
-    </Screen>
+    // <Screen>
+    //   <AppPicker
+    //     icon="apps"
+    //     items={catagories}
+    //     placeholder="Category"
+    //     selectedItem={catagory}
+    //     onSelectItem={item => setCatagory(item)}
+    //   />
+    // </Screen>
+    // <LoginScreen />
+    <ListingEditScreen />
   );
 }
 
